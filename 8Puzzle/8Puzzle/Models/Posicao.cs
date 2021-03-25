@@ -1,4 +1,5 @@
-﻿namespace AStar8Puzzle
+﻿namespace _8Puzzle.Models
+
 {
     public class Posicao
     {
