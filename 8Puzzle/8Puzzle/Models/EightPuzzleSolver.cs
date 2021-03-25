@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AStar8Puzzle
+namespace _8Puzzle.Models
+
 {
     class EightPuzzleSolver
     {
@@ -36,6 +37,7 @@ namespace AStar8Puzzle
         {
             EstadoAtual = estadoInicial;
             EstadoObjetivo = estadoObjetivo;
+
         }
 
         public void Resolver()

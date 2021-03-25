@@ -59,3 +59,5 @@ https://www.geeksforgeeks.org/check-instance-8-puzzle-solvable/
 
 https://math.stackexchange.com/questions/293527/how-to-check-if-a-8-puzzle-is-solvable
 https://stackoverflow.com/questions/36108269/does-8-puzzle-solvability-rules-work-for-any-goal-state
+
+https://github.com/risingsudhir/8-Puzzle-A-Star-Algorithm/blob/master/README.md
