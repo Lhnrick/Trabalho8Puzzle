@@ -47,13 +47,42 @@
 
     </div>
 
+    <div class="col-md-12">
+        <button type="button" @onclick="Resolver" class="btn btn-danger">Resolver</button>
+    </div>
+
 </div>
 
 @code {
 
-    public int Dimensao { get; set; } = 3;    
+    public int Dimensao { get; set; } = 3;
 
     private void AlterarPara3por3() => Dimensao = 3;
 
     private void AlterarPara4por4() => Dimensao = 4;
+
+
+    public void Resolver()
+    {
+        int[,] estadoInicial = new int[,]
+        {
+            { 1, 2, 3},
+            { 4, 5, 0},
+            { 7, 8, 6},
+        };
+
+        int[,] estadoObjetivo = new int[,]
+        {
+            { 1, 2, 3},
+            { 4, 5, 6},
+            { 7, 8, 0},
+        };
+
+        new _8Puzzle.Models.Solver(estadoInicial, estadoObjetivo).Solve();
+
+        //TODO: Verificar se os estado são possíveis
+        //TODO: Verificar a distância hamming
+        //TODO: Mostrar o caminho feito 
+    }
+
 }

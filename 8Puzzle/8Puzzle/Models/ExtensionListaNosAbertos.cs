@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace _8Puzzle.Models
@@ -7,12 +8,11 @@ namespace _8Puzzle.Models
     {
         public static No BuscarNoComMenorCusto(this List<No> nosAbertos)
         {
-            No noMenorCusto = nosAbertos.First();
+            // .ThenBy(no => no.ValorHamming)
+            No noMenorCusto = nosAbertos.OrderBy(no => no.ValorDistanciaManhattan).FirstOrDefault();
 
-            foreach (var no in nosAbertos)
-            {
-
-            }
+            if (noMenorCusto == null)
+                throw new Exception("Deu erro ao tentar encontrar o no com menor custo");
 
             return noMenorCusto;
         }

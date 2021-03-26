@@ -46,11 +46,12 @@ namespace _8Puzzle.Models
 
         public No NoInicial { get; set; }
 
-        public int[][] EstadoObjetivo { get; set; }
+        public int[,] EstadoObjetivo { get; set; }
 
-        public Solver(No noInicial)
+        public Solver(int[,] estadoInicial, int[,] estadoFinal)
         {
-            NoInicial = noInicial;
+            NoInicial = new No(estadoInicial, null);
+            EstadoObjetivo = estadoFinal;
         }
 
         public void Solve()
@@ -69,12 +70,15 @@ namespace _8Puzzle.Models
                 if (noMenorCusto.EstadoAtual.EhEstadoObjetivo(EstadoObjetivo))
                 {
                     break;
-                }                
-
-                Nosfechados.Add(noMenorCusto);
+                }
 
                 // Gerar possibilidades
-                noMenorCusto.Expandir();
+                noMenorCusto.Expandir(EstadoObjetivo);
+
+                NosAbertos.AddRange(noMenorCusto.Filhos);
+
+                Nosfechados.Add(noMenorCusto);
+                NosAbertos.Remove(noMenorCusto);
             }
         }
     }

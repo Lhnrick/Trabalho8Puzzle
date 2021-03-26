@@ -16,17 +16,16 @@ namespace _8Puzzle.Models
         }
 
 
-        public void Gerar()
+        public void Gerar(int[,] estadoObjetivo)
         {
             Posicao espacoVazio = EncontrarEspacoVazio(No.EstadoAtual);
 
-            List<int[][]> estados = null;
-
-            int[][] estadoGerado;
+            var estados = new List<int[,]>();
+            int[,] estadoGerado;
             bool foiGerado;
 
 
-            int[][] estadoAtual = No.EstadoAtual;
+            int[,] estadoAtual = No.EstadoAtual;
 
             // Pra cima
             foiGerado = GerarPossibilidadeCima(estadoAtual, espacoVazio, out estadoGerado);
@@ -50,24 +49,34 @@ namespace _8Puzzle.Models
 
             var nosFilhos = new List<No>();
 
-            foreach (int[][] estado in estados)
-                nosFilhos.Add(new No(estado, No));
+            var custoManhattan = new CustoManhattan();
+            var valorHamming = new CustoHamming();
+
+            foreach (int[,] estado in estados)
+            {
+                var no = new No(estado, No);
+                no.Pontuacao = 0;
+                no.ValorDistanciaManhattan = custoManhattan.DistanciaManhattan(no, estadoObjetivo);
+                no.ValorHamming = valorHamming.CompararEstados(estadoAtual, estadoObjetivo);
+
+                nosFilhos.Add(no);
+            }
 
             No.Filhos = nosFilhos;
         }
 
-        private bool GerarPossibilidadeCima(int[][] estado, Posicao espacoVazio, out int[][] estadoGerado)
+        private bool GerarPossibilidadeCima(int[,] estado, Posicao espacoVazio, out int[,] estadoGerado)
         {
             Posicao paraCima = new Posicao(espacoVazio.Linha - 1, espacoVazio.Coluna);
             if (PosicaoValida(paraCima))
             {
-                int[][] novoEstado = (int[][])estado.Clone();
+                int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha][paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
 
-                novoEstado[paraCima.Linha][paraCima.Coluna] = novoEstado[espacoVazio.Linha][espacoVazio.Coluna];
+                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha][espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -77,18 +86,18 @@ namespace _8Puzzle.Models
             return false;
         }
 
-        private bool GerarPossibilidadeDireita(int[][] estado, Posicao espacoVazio, out int[][] estadoGerado)
+        private bool GerarPossibilidadeDireita(int[,] estado, Posicao espacoVazio, out int[,] estadoGerado)
         {
             Posicao paraCima = new Posicao(espacoVazio.Linha, espacoVazio.Coluna + 1);
             if (PosicaoValida(paraCima))
             {
-                int[][] novoEstado = (int[][])estado.Clone();
+                int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha][paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
 
-                novoEstado[paraCima.Linha][paraCima.Coluna] = novoEstado[espacoVazio.Linha][espacoVazio.Coluna];
+                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha][espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -98,18 +107,18 @@ namespace _8Puzzle.Models
             return false;
         }
 
-        private bool GerarPossibilidadeBaixo(int[][] estado, Posicao espacoVazio, out int[][] estadoGerado)
+        private bool GerarPossibilidadeBaixo(int[,] estado, Posicao espacoVazio, out int[,] estadoGerado)
         {
             Posicao paraCima = new Posicao(espacoVazio.Linha + 1, espacoVazio.Coluna);
             if (PosicaoValida(paraCima))
             {
-                int[][] novoEstado = (int[][])estado.Clone();
+                int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha][paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
 
-                novoEstado[paraCima.Linha][paraCima.Coluna] = novoEstado[espacoVazio.Linha][espacoVazio.Coluna];
+                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha][espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -119,18 +128,18 @@ namespace _8Puzzle.Models
             return false;
         }
 
-        private bool GerarPossibilidadeEsquerda(int[][] estado, Posicao espacoVazio, out int[][] estadoGerado)
+        private bool GerarPossibilidadeEsquerda(int[,] estado, Posicao espacoVazio, out int[,] estadoGerado)
         {
             Posicao paraCima = new Posicao(espacoVazio.Linha, espacoVazio.Coluna - 1);
             if (PosicaoValida(paraCima))
             {
-                int[][] novoEstado = (int[][])estado.Clone();
+                int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha][paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
 
-                novoEstado[paraCima.Linha][paraCima.Coluna] = novoEstado[espacoVazio.Linha][espacoVazio.Coluna];
+                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha][espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -141,13 +150,13 @@ namespace _8Puzzle.Models
         }
 
 
-        private Posicao EncontrarEspacoVazio(int[][] estado)
+        private Posicao EncontrarEspacoVazio(int[,] estado)
         {
             for (int i = 0; i < estado.GetLength(0); i++)
             {
                 for (int j = 0; j < estado.GetLength(1); j++)
                 {
-                    int valorPosicao = estado[i][j];
+                    int valorPosicao = estado[i,j];
 
                     if (valorPosicao == 0)
                     {
