@@ -6,13 +6,30 @@
 
 <div class="row">
 
+    <div class="col-md-12">
+        <label>Dimensão</label>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="3por3" id="3por3" checked @onclick="AlterarPara3por3">
+            <label class="form-check-label" for="3por3">
+                3x3
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="4por4" id="4por4" @onclick="AlterarPara4por4">
+            <label class="form-check-label" for="4por4">
+                4x4
+            </label>
+        </div>
+    </div>
+
     <div class="col-md-6">
 
         <div class="card">
 
             <div class="card-header">Estado inicial</div>
             <div class="card-body">
-                <Tabuleiro />
+                <Tabuleiro Dimensao="Dimensao" />
             </div>
         </div>
 
@@ -24,7 +41,7 @@
 
             <div class="card-header">Estado final</div>
             <div class="card-body">
-                <Tabuleiro />          
+                <Tabuleiro Dimensao="Dimensao" />
             </div>
         </div>
 
@@ -34,4 +51,9 @@
 
 @code {
 
+    public int Dimensao { get; set; } = 3;    
+
+    private void AlterarPara3por3() => Dimensao = 3;
+
+    private void AlterarPara4por4() => Dimensao = 4;
 }

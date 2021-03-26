@@ -1,18 +1,15 @@
-﻿
-<div class="grid">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
+﻿@inject IJSRuntime JSRuntime
 
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>
+<div class="grid @(Dimensao == 4 ? "w-h-400" : "w-h-300")">
 
-    <div>7</div>
-    <div>8</div>
-    <div>0</div>
+    @for (int i = 0; i < Dimensao * Dimensao - 1; i++)
+    {
+        <input type="number" min="0" max="@(Dimensao == 3 ? 8 : 14)" />
+    }
 </div>
 
 @code {
 
+    [Parameter]
+    public int Dimensao { get; set; }
 }

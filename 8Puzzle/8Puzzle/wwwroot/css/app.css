@@ -3,19 +3,33 @@
 .grid {
     display: flex;
     flex-wrap: wrap;
-    width: 300px;
-    height: 300px;
     background-color: blue;
 }
 
     .grid div {
-        width: 100px;
-        height: 100px;
+        min-width: 100px;
+        min-height: 100px;
         background-color: yellow;
         font-size: 60px;
         text-align: center;
         font-weight: bold;
-   }
+        border: solid 1px black;
+    }
+
+        .grid div input {
+            min-width: 100px;
+            min-height: 100px;
+        }
+
+.w-h-300 {
+    width: 300px;
+    height: 300px;
+}
+
+.w-h-400 {
+    width: 400px;
+    height: 400px;
+}
 
 /*================================================================================*/
 

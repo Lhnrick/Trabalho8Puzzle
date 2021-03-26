@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace _8Puzzle.Models
 {
     public class Solver
     {
-        /*
-         
+        /*         
             *** Lista de nós aberto, guarda as possibilidades geradas
             *** Lista de nós fechado, guarda os melhores nós escolhidos pelo algoritmo
 
