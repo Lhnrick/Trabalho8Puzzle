@@ -1,15 +1,117 @@
-﻿@inject IJSRuntime JSRuntime
+﻿<div class="grid @(Dimensao == 4 ? "w-h-400" : "w-h-300")">
 
-<div class="grid @(Dimensao == 4 ? "w-h-400" : "w-h-300")">
+    @*@for (int i = 0; i < Dimensao * Dimensao - 1; i++)
+        {
+            <input type="number" min="0" max="@(Dimensao == 3 ? 8 : 14)" class="input-w-h-100 text-center"/>
+        }*@
 
-    @for (int i = 0; i < Dimensao * Dimensao - 1; i++)
+    @if (Dimensao == 3)
     {
-        <input type="number" min="0" max="@(Dimensao == 3 ? 8 : 14)" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres00" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres01" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres02" />
+
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres10" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres11" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres12" />
+
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres20" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres21" />
+        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres22" />
     }
+
+    @if (Dimensao == 4)
+    {
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro00" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro01" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro02" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro03" />
+
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro10" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro11" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro12" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro13" />
+
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro20" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro21" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro22" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro23" />
+
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro30" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro31" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro32" />
+        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro33" />
+    }
+
 </div>
 
 @code {
 
     [Parameter]
     public int Dimensao { get; set; }
+
+    #region 3 x 3
+
+    [Parameter]
+    public int tres00 { get; set; }
+    [Parameter]
+    public int tres01 { get; set; }
+    [Parameter]
+    public int tres02 { get; set; }
+
+    [Parameter]
+    public int tres10 { get; set; }
+    [Parameter]
+    public int tres11 { get; set; }
+    [Parameter]
+    public int tres12 { get; set; }
+
+    [Parameter]
+    public int tres20 { get; set; }
+    [Parameter]
+    public int tres21 { get; set; }
+    [Parameter]
+    public int tres22 { get; set; }
+
+    #endregion
+
+    #region 4 x 4
+
+    [Parameter]
+    public int quatro00 { get; set; }
+    [Parameter]
+    public int quatro01 { get; set; }
+    [Parameter]
+    public int quatro02 { get; set; }
+    [Parameter]
+    public int quatro03 { get; set; }
+
+    [Parameter]
+    public int quatro10 { get; set; }
+    [Parameter]
+    public int quatro11 { get; set; }
+    [Parameter]
+    public int quatro12 { get; set; }
+    [Parameter]
+    public int quatro13 { get; set; }
+
+    [Parameter]
+    public int quatro20 { get; set; }
+    [Parameter]
+    public int quatro21 { get; set; }
+    [Parameter]
+    public int quatro22 { get; set; }
+    [Parameter]
+    public int quatro23 { get; set; }
+
+    [Parameter]
+    public int quatro30 { get; set; }
+    [Parameter]
+    public int quatro31 { get; set; }
+    [Parameter]
+    public int quatro32 { get; set; }
+    [Parameter]
+    public int quatro33 { get; set; }
+
+    #endregion
 }

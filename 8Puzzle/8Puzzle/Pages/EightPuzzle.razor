@@ -6,30 +6,22 @@
 
 <div class="row">
 
-    <div class="col-md-12">
-        <label>Dimensão</label>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="3por3" id="3por3" checked @onclick="AlterarPara3por3">
-            <label class="form-check-label" for="3por3">
-                3x3
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="4por4" id="4por4" @onclick="AlterarPara4por4">
-            <label class="form-check-label" for="4por4">
-                4x4
-            </label>
-        </div>
-    </div>
-
     <div class="col-md-6">
 
         <div class="card">
 
             <div class="card-header">Estado inicial</div>
             <div class="card-body">
-                <Tabuleiro Dimensao="Dimensao" />
+                <Tabuleiro Dimensao="Dimensao"
+                           tres00="1"
+                           tres01="2"
+                           tres02="3"
+                           tres10="4"
+                           tres11="5"
+                           tres12="0"
+                           tres20="7"
+                           tres21="8"
+                           tres22="6" />
             </div>
         </div>
 
@@ -41,14 +33,72 @@
 
             <div class="card-header">Estado final</div>
             <div class="card-body">
-                <Tabuleiro Dimensao="Dimensao" />
+                <Tabuleiro Dimensao="Dimensao"
+                           tres00="1"
+                           tres01="2"
+                           tres02="3"
+                           tres10="4"
+                           tres11="5"
+                           tres12="6"
+                           tres20="7"
+                           tres21="8"
+                           tres22="0" />
             </div>
         </div>
 
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-6 mt-2">
+        <div class="card">
+            <div class="card-header">Dimensão</div>
+            <div class="card-body">
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="3por3" id="3por3" checked @onclick="AlterarPara3por3">
+                    <label class="form-check-label" for="3por3">
+                        3x3
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="4por4" id="4por4" @onclick="AlterarPara4por4">
+                    <label class="form-check-label" for="4por4">
+                        4x4
+                    </label>
+                </div>
+
+            </div>
+
+            <input @bind="NumeroMaximoIteracoes" type="number" min="1" max="@int.MaxValue" />
+
+        </div>
+    </div>
+
+    <div class="col-md-6 text-right mt-2">
         <button type="button" @onclick="Resolver" class="btn btn-danger">Resolver</button>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card">
+            <div class="card-header">
+                RESULTADOS
+            </div>
+            <div class="card-body">
+
+                @foreach (MarkupString no in NosMarkupStr)
+                {
+                    @no
+
+                    <br />
+                }
+
+            </div>
+        </div>
+
     </div>
 
 </div>
@@ -57,32 +107,74 @@
 
     public int Dimensao { get; set; } = 3;
 
+    private List<MarkupString> NosMarkupStr = new List<MarkupString>();
+
+    private int NumeroMaximoIteracoes { get; set; } = 10000;
+
     private void AlterarPara3por3() => Dimensao = 3;
 
     private void AlterarPara4por4() => Dimensao = 4;
 
-
     public void Resolver()
     {
-        int[,] estadoInicial = new int[,]
-        {
-            { 1, 2, 3},
-            { 4, 5, 0},
-            { 7, 8, 6},
+        //int[,] estadoInicial = new int[,]
+        //{
+        //    { 1, 2, 3},
+        //    { 0, 4, 6},
+        //    { 7, 5, 8},
+        //};
+
+        //int[,] estadoObjetivo = new int[,]
+        //{
+        //    { 1, 2, 3},
+        //    { 4, 5, 6},
+        //    { 7, 8, 0},
+        //};
+
+
+        int[,] estadoInicial = new int[,] {
+        { 1,  2,  3,  4 },
+        { 5,  6,  7,  8 },
+        { 9,  0, 10,  12},
+        { 13, 14, 11, 15}
         };
 
-        int[,] estadoObjetivo = new int[,]
-        {
-            { 1, 2, 3},
-            { 4, 5, 6},
-            { 7, 8, 0},
+        int[,] estadoObjetivo = new int[,] {
+        { 1,  2,  3,  4 },
+        { 5,  6,  7,  8 },
+        { 9,  10, 11, 12 },
+        { 13, 14, 15, 0 }
         };
 
-        new _8Puzzle.Models.Solver(estadoInicial, estadoObjetivo).Solve();
+        No ultimoNoConhecido = new _8Puzzle.Models.Solver(estadoInicial, estadoObjetivo, NumeroMaximoIteracoes).Solve();
 
-        //TODO: Verificar se os estado são possíveis
-        //TODO: Verificar a distância hamming
-        //TODO: Mostrar o caminho feito 
+        List<No> nos = new Caminho().PegarCaminho(ultimoNoConhecido);
+
+        PrintarArray(nos);
+
+        //TODO: Verificar se os estado são possíveis        
+        //TODO: Arrumar view para carregar os valores    
+    }
+
+    private void PrintarArray(List<No> nos)
+    {
+        foreach (var no in nos.OrderBy(x => x.Profundidade))
+        {
+            string strMatriz = "";
+
+            for (int i = 0; i < no.EstadoAtual.GetLength(0); i++)
+            {
+                for (int j = 0; j < no.EstadoAtual.GetLength(1); j++)
+                {
+                    strMatriz += $"[{no.EstadoAtual[i, j]}] ";
+                }
+
+                strMatriz += @" <br /> ";
+            }
+
+            MarkupString resultString = (MarkupString)strMatriz;
+            NosMarkupStr.Add(resultString);
+        }
     }
 
 }

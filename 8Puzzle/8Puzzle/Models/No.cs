@@ -11,6 +11,8 @@ namespace _8Puzzle.Models
         public int ValorDistanciaManhattan { get; set; }
         public int ValorHamming { get; set; }
 
+        public int Profundidade { get; set; }
+
         public No Pai { get; set; }
 
         public No(int[,] estadoAtual, No pai)

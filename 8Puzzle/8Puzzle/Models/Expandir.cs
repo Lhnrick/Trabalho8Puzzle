@@ -47,6 +47,20 @@ namespace _8Puzzle.Models
             if (foiGerado)
                 estados.Add(estadoGerado);
 
+            // Remover o estado anterior
+            var noPai = No.Pai;
+            if (noPai != null)
+            {
+                var estadoRetorno = RemoverEstadoAnterior(estados, noPai.EstadoAtual);
+
+                if (estadoRetorno != null)
+                {
+                    bool foiRemovido = estados.Remove(estadoRetorno);
+
+                    Console.WriteLine(foiRemovido);
+                }
+            }
+
             var nosFilhos = new List<No>();
 
             var custoManhattan = new CustoManhattan();
@@ -58,11 +72,44 @@ namespace _8Puzzle.Models
                 no.Pontuacao = 0;
                 no.ValorDistanciaManhattan = custoManhattan.DistanciaManhattan(no, estadoObjetivo);
                 no.ValorHamming = valorHamming.CompararEstados(estadoAtual, estadoObjetivo);
+                no.Profundidade = No.Profundidade + 1;
 
                 nosFilhos.Add(no);
             }
 
             No.Filhos = nosFilhos;
+        }
+
+        private int[,] RemoverEstadoAnterior(List<int[,]> estados, int[,] estadoAnterior)
+        {
+            foreach (int[,] estado in estados)
+            {
+                bool EhIgual = CompararEstadosIguais(estado, estadoAnterior);
+
+                if (EhIgual)
+                {
+                    return estado;
+                }
+            }
+
+            return null;
+        }
+
+        private bool CompararEstadosIguais(int[,] estado, int[,] estado2)
+        {
+            for (int i = 0; i < estado.GetLength(0); i++)
+            {
+                for (int j = 0; j < estado.GetLength(1); j++)
+                {
+                    bool ehIgual = estado[i, j] == estado2[i, j];
+                    if (!ehIgual)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private bool GerarPossibilidadeCima(int[,] estado, Posicao espacoVazio, out int[,] estadoGerado)
@@ -72,11 +119,11 @@ namespace _8Puzzle.Models
             {
                 int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha, paraCima.Coluna];
 
-                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
+                novoEstado[paraCima.Linha, paraCima.Coluna] = novoEstado[espacoVazio.Linha, espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha, espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -93,11 +140,11 @@ namespace _8Puzzle.Models
             {
                 int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha, paraCima.Coluna];
 
-                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
+                novoEstado[paraCima.Linha, paraCima.Coluna] = novoEstado[espacoVazio.Linha, espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha, espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -114,11 +161,11 @@ namespace _8Puzzle.Models
             {
                 int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha, paraCima.Coluna];
 
-                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
+                novoEstado[paraCima.Linha, paraCima.Coluna] = novoEstado[espacoVazio.Linha, espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha, espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -135,11 +182,11 @@ namespace _8Puzzle.Models
             {
                 int[,] novoEstado = (int[,])estado.Clone();
 
-                int valorAntesMovimento = novoEstado[paraCima.Linha,paraCima.Coluna];
+                int valorAntesMovimento = novoEstado[paraCima.Linha, paraCima.Coluna];
 
-                novoEstado[paraCima.Linha,paraCima.Coluna] = novoEstado[espacoVazio.Linha,espacoVazio.Coluna];
+                novoEstado[paraCima.Linha, paraCima.Coluna] = novoEstado[espacoVazio.Linha, espacoVazio.Coluna];
 
-                novoEstado[espacoVazio.Linha,espacoVazio.Coluna] = valorAntesMovimento;
+                novoEstado[espacoVazio.Linha, espacoVazio.Coluna] = valorAntesMovimento;
 
                 estadoGerado = novoEstado;
                 return true;
@@ -156,7 +203,7 @@ namespace _8Puzzle.Models
             {
                 for (int j = 0; j < estado.GetLength(1); j++)
                 {
-                    int valorPosicao = estado[i,j];
+                    int valorPosicao = estado[i, j];
 
                     if (valorPosicao == 0)
                     {

@@ -2,24 +2,25 @@
 
 .grid {
     display: flex;
-    flex-wrap: wrap;
-    background-color: blue;
+    flex-wrap: wrap;    
 }
 
     .grid div {
         min-width: 100px;
-        min-height: 100px;
-        background-color: yellow;
+        min-height: 100px;        
         font-size: 60px;
         text-align: center;
         font-weight: bold;
         border: solid 1px black;
     }
 
-        .grid div input {
-            min-width: 100px;
-            min-height: 100px;
-        }
+.input-w-h-100 {
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    padding-left: 15px;
+}
 
 .w-h-300 {
     width: 300px;
