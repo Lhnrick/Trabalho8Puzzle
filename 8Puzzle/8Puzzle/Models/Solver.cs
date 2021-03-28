@@ -46,15 +46,18 @@ namespace _8Puzzle.Models
 
         public No NoInicial { get; set; }
 
+        public int IteracoesLimite { get; set; }
+
         public int[,] EstadoObjetivo { get; set; }
 
-        public Solver(int[,] estadoInicial, int[,] estadoFinal)
+        public Solver(int[,] estadoInicial, int[,] estadoFinal, int iteracoesLimite)
         {
             NoInicial = new No(estadoInicial, null);
             EstadoObjetivo = estadoFinal;
+            IteracoesLimite = iteracoesLimite;
         }
 
-        public void Solve()
+        public No Solve(out bool encontrouSolucao)
         {
             NosAbertos = new List<No>();
             Nosfechados = new List<No>();
@@ -63,13 +66,24 @@ namespace _8Puzzle.Models
 
             NosAbertos.Add(NoInicial);
 
+            int contadorIteracoes = 1;
+
             while (NosAbertos.Count > 0)
             {
                 No noMenorCusto = NosAbertos.BuscarNoComMenorCusto();
 
+                NosAbertos = new List<No>();
+
                 if (noMenorCusto.EstadoAtual.EhEstadoObjetivo(EstadoObjetivo))
                 {
-                    break;
+                    Nosfechados.Add(noMenorCusto);
+                    encontrouSolucao = true;
+                    return noMenorCusto;
+                }
+
+                if (contadorIteracoes >= IteracoesLimite) {
+                    encontrouSolucao = false;
+                    return noMenorCusto;
                 }
 
                 // Gerar possibilidades
@@ -79,7 +93,12 @@ namespace _8Puzzle.Models
 
                 Nosfechados.Add(noMenorCusto);
                 NosAbertos.Remove(noMenorCusto);
+
+                contadorIteracoes++;
             }
+
+            encontrouSolucao = false;
+            return null;
         }
     }
 }

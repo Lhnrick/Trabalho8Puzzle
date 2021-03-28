@@ -1,0 +1,27 @@
+﻿<h3>Mensagem</h3>
+
+<div class="row" style="display: @(Visivel ? "block" : "none")">
+
+    <div class="col-md-12">
+        <label class="">@Msg</label>
+        <span @onclick="EsconderMensagem">X</span>
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public string Msg { get; set; }
+
+    [Parameter]
+    public TipoMensagem TipoMensagem { get; set; }
+
+    [Parameter]
+    public bool Visivel { get; set; } = false;
+
+    private void EsconderMensagem() 
+    { 
+        Visivel = false; 
+    }
+}

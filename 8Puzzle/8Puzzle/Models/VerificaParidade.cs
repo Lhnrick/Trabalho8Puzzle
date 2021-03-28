@@ -7,48 +7,31 @@ namespace _8Puzzle.Models
 {
     public class VerificaParidade
     {
-        public bool ehResolvivel(int[] estado)
+
+        // A utility function to count
+        // inversions in given array 'arr[]'
+       public static int GetInvCount(int[,] estado)
         {
-            int paridade = 0;
-            int larguraGrid = (int)Math.Sqrt(estado.Length);
-            int linha = 0; // a linha atual em que estamos
-            int linhaBranco = 0; // a linha com o ladrilho em branco
+            int inv_count = 0;
+            for (int i = 0; i < 3 - 1; i++)
+                for (int j = i + 1; j < 3; j++)
 
-            for (int i = 0; i < estado.GetLength(0); i++)
-            {
-                if (i % larguraGrid == 0)
-                { // avançar para a próxima linha
-                    linha++;
-                }
-                if (estado[i] == 0)
-                { // o ladrilho em branco
-                    linhaBranco = linha; // salve a linha na qual encontrou
-                    continue;
-                }
-                for (int j = i + 1; j < estado.Length; j++)
-                {
-                    if (estado[i] > estado[j] && estado[j] != 0)
-                    {
-                        paridade++;
-                    }
-                }
-            }
+                    // Value 0 is used for empty space
+                    if (estado[j, i] > 0 && estado[j, i] > estado[i, j])
+                        inv_count++;
+            return inv_count;
+        }
 
-            if (larguraGrid % 2 == 0)
-            { 
-                if (linhaBranco % 2 == 0)
-                {// em branco na linha ímpar
-                    return paridade % 2 == 0;
-                }
-                else
-                { // em branco na linha par
-                    return paridade % 2 != 0;
-                }
-            }
-            else
-            {
-                return paridade % 2 == 0;
-            }
+        // This function returns true
+        // if given 8 puzzle is solvable.
+       public static bool IsSolvable(int[,] matriz)
+        {
+            // Count inversions in given 8 puzzle
+            int invCount = GetInvCount(matriz);
+
+            // return true if inversion count is even.
+            return (invCount % 2 == 0);
         }
     }
-}
+
+    }
