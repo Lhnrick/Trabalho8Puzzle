@@ -121,7 +121,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="3por3" id="3por3" @bind="Dimensao" checked @onclick="AlterarPara3por3">
+                                    <input class="form-check-input" type="radio" name="form-checked" id="3por3" @bind="Dimensao" checked="@(DimensaoSelecionada == 1)" @onclick="AlterarPara3por3">
                                     <label class="form-check-label" for="3por3">
                                         3 x 3
                                     </label>
@@ -130,7 +130,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="4por4" id="4por4" @bind="Dimensao" @onclick="AlterarPara4por4">
+                                    <input class="form-check-input" type="radio" name="form-checked" id="4por4" @bind="Dimensao" checked="@(DimensaoSelecionada == 2)" @onclick="AlterarPara4por4">
                                     <label class="form-check-label" for="4por4">
                                         4 x 4
                                     </label>
@@ -210,6 +210,9 @@
     private bool GerandoSolucao { get; set; }
 
     public int Dimensao { get; set; } = 3;
+
+    private int DimensaoSelecionada = 1;
+
 
     public int[,] EstadoInicial { get; set; }
     public int[,] EstadoFinal { get; set; }
