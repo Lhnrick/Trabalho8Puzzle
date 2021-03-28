@@ -57,7 +57,7 @@ namespace _8Puzzle.Models
             IteracoesLimite = iteracoesLimite;
         }
 
-        public No Solve()
+        public No Solve(out bool encontrouSolucao)
         {
             NosAbertos = new List<No>();
             Nosfechados = new List<No>();
@@ -77,11 +77,14 @@ namespace _8Puzzle.Models
                 if (noMenorCusto.EstadoAtual.EhEstadoObjetivo(EstadoObjetivo))
                 {
                     Nosfechados.Add(noMenorCusto);
+                    encontrouSolucao = true;
                     return noMenorCusto;
                 }
 
-                if (contadorIteracoes >= IteracoesLimite)
+                if (contadorIteracoes >= IteracoesLimite) {
+                    encontrouSolucao = false;
                     return noMenorCusto;
+                }
 
                 // Gerar possibilidades
                 noMenorCusto.Expandir(EstadoObjetivo);
@@ -94,6 +97,7 @@ namespace _8Puzzle.Models
                 contadorIteracoes++;
             }
 
+            encontrouSolucao = false;
             return null;
         }
     }

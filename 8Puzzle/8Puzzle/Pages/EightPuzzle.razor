@@ -10,171 +10,446 @@
 
         <div class="card">
 
-            <div class="card-header">Estado inicial</div>
+            <div class="card-header"><b>ESTADO INICIAL</b></div>
             <div class="card-body">
-                <Tabuleiro Dimensao="Dimensao"
-                           tres00="1"
-                           tres01="2"
-                           tres02="3"
-                           tres10="4"
-                           tres11="5"
-                           tres12="0"
-                           tres20="7"
-                           tres21="8"
-                           tres22="6" />
+                <div class="grid @(Dimensao == 4 ? "w-h-400" : "w-h-300")">
+                    @if (Dimensao == 3)
+                    {
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres00Inicial" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres01Inicial" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres02Inicial" />
+
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres10Inicial" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres11Inicial" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres12Inicial" />
+
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres20Inicial" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres21Inicial" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres22Inicial" />
+                    }
+
+                    @if (Dimensao == 4)
+                    {
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro00Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro01Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro02Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro03Inicial" />
+
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro10Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro11Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro12Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro13Inicial" />
+
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro20Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro21Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro22Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro23Inicial" />
+
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro30Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro31Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro32Inicial" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro33Inicial" />
+                    }
+                </div>
             </div>
         </div>
-
     </div>
 
     <div class="col-md-6">
 
         <div class="card">
 
-            <div class="card-header">Estado final</div>
+            <div class="card-header"><b>ESTADO FINAL</b></div>
             <div class="card-body">
-                <Tabuleiro Dimensao="Dimensao"
-                           tres00="1"
-                           tres01="2"
-                           tres02="3"
-                           tres10="4"
-                           tres11="5"
-                           tres12="6"
-                           tres20="7"
-                           tres21="8"
-                           tres22="0" />
+                <div class="grid @(Dimensao == 4 ? "w-h-400" : "w-h-300")">
+
+                    @if (Dimensao == 3)
+                    {
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres00Final" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres01Final" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres02Final" />
+
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres10Final" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres11Final" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres12Final" />
+
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres20Final" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres21Final" />
+                        <input type="number" min="0" max="8" class="input-w-h-100 text-center" @bind="tres22Final" />
+                    }
+
+                    @if (Dimensao == 4)
+                    {
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro00Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro01Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro02Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro03Final" />
+
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro10Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro11Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro12Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro13Final" />
+
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro20Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro21Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro22Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro23Final" />
+
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro30Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro31Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro32Final" />
+                        <input type="number" min="0" max="14" class="input-w-h-100 text-center" @bind="quatro33Final" />
+                    }
+
+                </div>
             </div>
         </div>
 
     </div>
 
-    <div class="col-md-6 mt-2">
+    <div class="col-md-12 mt-2">
         <div class="card">
-            <div class="card-header">Dimensão</div>
+            <div class="card-header"><b>CONFIGURAÇÕES</b></div>
             <div class="card-body">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="3por3" id="3por3" checked @onclick="AlterarPara3por3">
-                    <label class="form-check-label" for="3por3">
-                        3x3
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="4por4" id="4por4" @onclick="AlterarPara4por4">
-                    <label class="form-check-label" for="4por4">
-                        4x4
-                    </label>
-                </div>
+                <div class="row">
 
+                    <div class="col-md-6">
+                        <label for="exampleFormControlInput1" class="form-label">Dimensão</label>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="3por3" id="3por3" @bind="Dimensao" checked @onclick="AlterarPara3por3">
+                                    <label class="form-check-label" for="3por3">
+                                        3 x 3
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="4por4" id="4por4" @bind="Dimensao" @onclick="AlterarPara4por4">
+                                    <label class="form-check-label" for="4por4">
+                                        4 x 4
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Número máximo de iterações</label>
+                            <input min="0" max="@int.MaxValue" type="number" class="form-control" @bind="NumeroMaximoIteracoes">
+                        </div>
+                    </div>
+
+                </div>
             </div>
-
-            <input @bind="NumeroMaximoIteracoes" type="number" min="1" max="@int.MaxValue" />
 
         </div>
     </div>
 
-    <div class="col-md-6 text-right mt-2">
-        <button type="button" @onclick="Resolver" class="btn btn-danger">Resolver</button>
+    <div class="col-md-12 text-right mt-2">
+        <button type="button" @onclick="Resolver" class="btn btn-primary">Resolver</button>
     </div>
 
 </div>
 
-<div class="row">
+@if (NosMarkupStr.Any())
+{    
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <b>RESULTADOS</b>
+                </div>
+                <div class="card-body">
 
-    <div class="col-md-12">
+                    @if (EncontrouSolucao)
+                    {
+                        <div class="alert alert-success mt-2" role="alert">
+                            Uma solução foi encontrada!! =D
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger mt-2" role="alert">
+                            Não foi encontrada uma solução com os parâmetros informados
+                        </div>
+                    }
 
-        <div class="card">
-            <div class="card-header">
-                RESULTADOS
-            </div>
-            <div class="card-body">
+                    @foreach (MarkupString no in NosMarkupStr)
+                    {
+                        @no
 
-                @foreach (MarkupString no in NosMarkupStr)
-                {
-                    @no
+                        <br />
+                    }
 
-                    <br />
-                }
-
+                </div>
             </div>
         </div>
-
     </div>
-
-</div>
+}
 
 @code {
 
-    public int Dimensao { get; set; } = 3;
-
     private List<MarkupString> NosMarkupStr = new List<MarkupString>();
 
-    private int NumeroMaximoIteracoes { get; set; } = 10000;
+    private int? NumeroMaximoIteracoes { get; set; }
 
     private void AlterarPara3por3() => Dimensao = 3;
 
     private void AlterarPara4por4() => Dimensao = 4;
 
+    private bool EncontrouSolucao { get; set; }
+
+    private bool GerandoSolucao { get; set; }
+
+    public int Dimensao { get; set; } = 3;
+
+    public int[,] EstadoInicial { get; set; }
+    public int[,] EstadoFinal { get; set; }
+
+    #region 3 x 3 inicial
+
+    [Parameter]
+    public int tres00Inicial { get; set; } = 1;
+    [Parameter]
+    public int tres01Inicial { get; set; } = 2;
+    [Parameter]
+    public int tres02Inicial { get; set; } = 3;
+
+    [Parameter]
+    public int tres10Inicial { get; set; } = 0;
+    [Parameter]
+    public int tres11Inicial { get; set; } = 4;
+    [Parameter]
+    public int tres12Inicial { get; set; } = 6;
+
+    [Parameter]
+    public int tres20Inicial { get; set; } = 7;
+    [Parameter]
+    public int tres21Inicial { get; set; } = 5;
+    [Parameter]
+    public int tres22Inicial { get; set; } = 8;
+
+    #endregion
+
+    #region 3 x 3 final
+
+    [Parameter]
+    public int tres00Final { get; set; } = 1;
+    [Parameter]
+    public int tres01Final { get; set; } = 2;
+    [Parameter]
+    public int tres02Final { get; set; } = 3;
+
+    [Parameter]
+    public int tres10Final { get; set; } = 4;
+    [Parameter]
+    public int tres11Final { get; set; } = 5;
+    [Parameter]
+    public int tres12Final { get; set; } = 6;
+
+    [Parameter]
+    public int tres20Final { get; set; } = 7;
+    [Parameter]
+    public int tres21Final { get; set; } = 8;
+    [Parameter]
+    public int tres22Final { get; set; } = 0;
+
+    #endregion
+
+    #region 4 x 4 inicial
+
+    [Parameter]
+    public int quatro00Inicial { get; set; } = 1;
+    [Parameter]
+    public int quatro01Inicial { get; set; } = 2;
+    [Parameter]
+    public int quatro02Inicial { get; set; } = 3;
+    [Parameter]
+    public int quatro03Inicial { get; set; } = 4;
+
+    [Parameter]
+    public int quatro10Inicial { get; set; } = 5;
+    [Parameter]
+    public int quatro11Inicial { get; set; } = 6;
+    [Parameter]
+    public int quatro12Inicial { get; set; } = 7;
+    [Parameter]
+    public int quatro13Inicial { get; set; } = 8;
+
+    [Parameter]
+    public int quatro20Inicial { get; set; } = 9;
+    [Parameter]
+    public int quatro21Inicial { get; set; } = 0;
+    [Parameter]
+    public int quatro22Inicial { get; set; } = 10;
+    [Parameter]
+    public int quatro23Inicial { get; set; } = 12;
+
+    [Parameter]
+    public int quatro30Inicial { get; set; } = 13;
+    [Parameter]
+    public int quatro31Inicial { get; set; } = 14;
+    [Parameter]
+    public int quatro32Inicial { get; set; } = 11;
+    [Parameter]
+    public int quatro33Inicial { get; set; } = 15;
+
+    #endregion
+
+    #region 4 x 4 final
+
+    [Parameter]
+    public int quatro00Final { get; set; } = 1;
+    [Parameter]
+    public int quatro01Final { get; set; } = 2;
+    [Parameter]
+    public int quatro02Final { get; set; } = 3;
+    [Parameter]
+    public int quatro03Final { get; set; } = 4;
+
+    [Parameter]
+    public int quatro10Final { get; set; } = 5;
+    [Parameter]
+    public int quatro11Final { get; set; } = 6;
+    [Parameter]
+    public int quatro12Final { get; set; } = 7;
+    [Parameter]
+    public int quatro13Final { get; set; } = 8;
+
+    [Parameter]
+    public int quatro20Final { get; set; } = 9;
+    [Parameter]
+    public int quatro21Final { get; set; } = 10;
+    [Parameter]
+    public int quatro22Final { get; set; } = 11;
+    [Parameter]
+    public int quatro23Final { get; set; } = 12;
+
+    [Parameter]
+    public int quatro30Final { get; set; } = 13;
+    [Parameter]
+    public int quatro31Final { get; set; } = 14;
+    [Parameter]
+    public int quatro32Final { get; set; } = 15;
+    [Parameter]
+    public int quatro33Final { get; set; } = 0;
+
+    #endregion
+
     public void Resolver()
-    {
-        //int[,] estadoInicial = new int[,]
-        //{
-        //    { 1, 2, 3},
-        //    { 0, 4, 6},
-        //    { 7, 5, 8},
-        //};
+    {        
+        NosMarkupStr.Clear();
 
-        //int[,] estadoObjetivo = new int[,]
-        //{
-        //    { 1, 2, 3},
-        //    { 4, 5, 6},
-        //    { 7, 8, 0},
-        //};
+        int numeroIteracoes = NumeroMaximoIteracoes.HasValue ? NumeroMaximoIteracoes.Value : int.MaxValue;
 
+        // Pegar valores iniciais
+        PegarValoresFormulario(true);
 
-        int[,] estadoInicial = new int[,] {
-        { 1,  2,  3,  4 },
-        { 5,  6,  7,  8 },
-        { 9,  0, 10,  12},
-        { 13, 14, 11, 15}
-        };
+        // Pegar valores finais
+        PegarValoresFormulario(false);
 
-        int[,] estadoObjetivo = new int[,] {
-        { 1,  2,  3,  4 },
-        { 5,  6,  7,  8 },
-        { 9,  10, 11, 12 },
-        { 13, 14, 15, 0 }
-        };
+        bool encontrouSolucao = false;
 
-        No ultimoNoConhecido = new _8Puzzle.Models.Solver(estadoInicial, estadoObjetivo, NumeroMaximoIteracoes).Solve();
+        GerandoSolucao = true;
+
+        No ultimoNoConhecido = new _8Puzzle.Models.Solver(EstadoInicial, EstadoFinal, numeroIteracoes).Solve(out encontrouSolucao);
+
+        GerandoSolucao = false;
+
+        EncontrouSolucao = encontrouSolucao;
 
         List<No> nos = new Caminho().PegarCaminho(ultimoNoConhecido);
 
         PrintarArray(nos);
 
-        //TODO: Verificar se os estado são possíveis        
-        //TODO: Arrumar view para carregar os valores    
+        //TODO: Verificar se os estado são possíveis, também verificar se não existe valor repetido
+        //TODO: Arrumar view para carregar os valores
     }
 
     private void PrintarArray(List<No> nos)
     {
+        string resultado = "";
+
         foreach (var no in nos.OrderBy(x => x.Profundidade))
         {
-            string strMatriz = "";
+            resultado += $"<div class='grid-resultado {(Dimensao == 4 ? "w-h-240" : "w-h-180")}'>";
 
             for (int i = 0; i < no.EstadoAtual.GetLength(0); i++)
             {
                 for (int j = 0; j < no.EstadoAtual.GetLength(1); j++)
                 {
-                    strMatriz += $"[{no.EstadoAtual[i, j]}] ";
+                    resultado += @$"<input type='number' disabled class='input-w-h-60 text-center' value='{no.EstadoAtual[i, j]}'/>";
                 }
 
-                strMatriz += @" <br /> ";
             }
 
-            MarkupString resultString = (MarkupString)strMatriz;
+            resultado += "</div>";
+
+            //resultado += @" <br /> ";
+
+            MarkupString resultString = (MarkupString)resultado;
             NosMarkupStr.Add(resultString);
+
+            resultado = "";
         }
     }
 
+    private void PegarValoresFormulario(bool ehEstadoInicial)
+    {
+        if (Dimensao == 3)
+        {
+            if (ehEstadoInicial)
+            {
+                EstadoInicial = new int[,]
+                {
+{ tres00Inicial, tres01Inicial, tres02Inicial},
+{ tres10Inicial, tres11Inicial, tres12Inicial },
+{ tres20Inicial, tres21Inicial, tres22Inicial},
+                                        };
+            }
+            else
+            {
+                EstadoFinal = new int[,]
+                {
+{ tres00Final, tres01Final, tres02Final},
+{ tres10Final, tres11Final, tres12Final},
+{ tres20Final, tres21Final, tres22Final},
+                                        };
+            }
+
+            return;
+        }
+
+        if (Dimensao == 4)
+        {
+            if (ehEstadoInicial)
+            {
+                EstadoInicial = new int[,] {
+{ quatro00Inicial,  quatro01Inicial,  quatro02Inicial,  quatro03Inicial },
+{ quatro10Inicial,  quatro11Inicial,  quatro12Inicial,  quatro13Inicial },
+{ quatro20Inicial,  quatro21Inicial, quatro22Inicial,  quatro23Inicial},
+{ quatro30Inicial, quatro31Inicial, quatro32Inicial, quatro33Inicial}
+                };
+            }
+
+            EstadoFinal = new int[,] {
+{ quatro00Final,  quatro01Final,  quatro02Final,  quatro03Final },
+{ quatro10Final,  quatro11Final,  quatro12Final,  quatro13Final },
+{ quatro20Final,  quatro21Final, quatro22Final,  quatro23Final},
+{ quatro30Final, quatro31Final, quatro32Final, quatro33Final}
+            };
+
+            return;
+        }
+
+        throw new Exception("Erro ao recuperar os valores");
+    }
 }
