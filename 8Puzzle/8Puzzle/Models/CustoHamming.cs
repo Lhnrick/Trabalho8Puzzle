@@ -1,5 +1,3 @@
-using System;
-
 namespace _8Puzzle.Models
 {
     public class CustoHamming

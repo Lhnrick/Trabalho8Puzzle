@@ -367,15 +367,15 @@
         // Pegar valores finais
         PegarValoresFormulario(false);
 
-        int repeticoes;
+        int repeticoes = default(int);
+        var validarCampo = new ValidaCampos();
 
-        bool estadoinicialvalido = new ValidaCampos().ExistemRepeticoes(EstadoInicial, out repeticoes);
+        bool existeRepeticoesEstadoInicial = validarCampo.ExistemRepeticoes(EstadoInicial, out repeticoes);
+        bool existeRepeticoesEstadoFinal = validarCampo.ExistemRepeticoes(EstadoFinal, out repeticoes);
 
-        bool estadofinalvalido = new ValidaCampos().ExistemRepeticoes(EstadoFinal, out repeticoes);
-
-        if (!estadofinalvalido || !estadoinicialvalido)
+        if (existeRepeticoesEstadoInicial || existeRepeticoesEstadoFinal)
         {
-             MostrarMensagemErro("Foram encontradas" + repeticoes + "posicoes repetidas, preencha corretamente para resolver o puzzle");
+            MostrarMensagemErro("Foram encontradas " + repeticoes + " posições repetidas, preencha corretamente para resolver o puzzle");
             return;
         }
 
@@ -383,7 +383,7 @@
 
         if (!ehResolvivel)
         {
-            MostrarMensagemErro("O conjunto de estados informados não é resolvivel");
+            MostrarMensagemErro("O conjunto de estados informados não é resolvível");
             return;
         }
         else
@@ -448,7 +448,7 @@
 { tres00Inicial, tres01Inicial, tres02Inicial},
 { tres10Inicial, tres11Inicial, tres12Inicial },
 { tres20Inicial, tres21Inicial, tres22Inicial},
-                                                        };
+                                                            };
             }
             else
             {
@@ -457,7 +457,7 @@
 { tres00Final, tres01Final, tres02Final},
 { tres10Final, tres11Final, tres12Final},
 { tres20Final, tres21Final, tres22Final},
-                                                        };
+                                                            };
             }
 
             return;
