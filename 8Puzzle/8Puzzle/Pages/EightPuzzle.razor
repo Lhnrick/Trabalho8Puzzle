@@ -6,6 +6,12 @@
 
 <div class="row">
 
+    <div class="col-md-12" style="display: @(MostrarMensagem ? "block" : "none")">
+        <div class="alert alert-danger mt-2" role="alert">
+            @Mensagem
+        </div>
+    </div>
+
     <div class="col-md-6">
 
         <div class="card">
@@ -34,17 +40,17 @@
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro01Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro02Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro03Inicial" />
-                                                           
+
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro10Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro11Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro12Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro13Inicial" />
-                                                           
+
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro20Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro21Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro22Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro23Inicial" />
-                                                           
+
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro30Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro31Inicial" />
                         <input type="number" min="0" max="15" class="input-w-h-100 text-center" @bind="quatro32Inicial" />
@@ -160,7 +166,7 @@
 </div>
 
 @if (NosMarkupStr.Any())
-{    
+{
     <div class="row mt-2">
         <div class="col-md-12">
             <div class="card">
@@ -213,6 +219,8 @@
 
     private int DimensaoSelecionada = 1;
 
+    private string Mensagem { get; set; }
+    public bool MostrarMensagem { get; set; }
 
     public int[,] EstadoInicial { get; set; }
     public int[,] EstadoFinal { get; set; }
@@ -359,7 +367,13 @@
         // Pegar valores finais
         PegarValoresFormulario(false);
 
-        VerificaParidade.IsSolvable(EstadoInicial);
+        bool ehResolvivel = new VerificaParidade().IsSolvable(EstadoInicial, EstadoFinal);
+
+        if (!ehResolvivel)
+        {
+            MostrarMensagemErro("O conjunto de estados informados não é resolvivel");
+            return;
+        }
 
         bool encontrouSolucao = false;
 
@@ -418,7 +432,7 @@
 { tres00Inicial, tres01Inicial, tres02Inicial},
 { tres10Inicial, tres11Inicial, tres12Inicial },
 { tres20Inicial, tres21Inicial, tres22Inicial},
-                                        };
+                                                        };
             }
             else
             {
@@ -427,7 +441,7 @@
 { tres00Final, tres01Final, tres02Final},
 { tres10Final, tres11Final, tres12Final},
 { tres20Final, tres21Final, tres22Final},
-                                        };
+                                                        };
             }
 
             return;
@@ -456,5 +470,13 @@
         }
 
         throw new Exception("Erro ao recuperar os valores");
+    }
+
+    private void EsconderMensagem() => MostrarMensagem = false;
+
+    private void MostrarMensagemErro(string mensagem)
+    {
+        Mensagem = mensagem;
+        MostrarMensagem = true;
     }
 }
