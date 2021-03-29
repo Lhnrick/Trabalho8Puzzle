@@ -421,6 +421,8 @@
 
         foreach (var no in nos.OrderBy(x => x.Profundidade))
         {
+            resultado += $"<div class='row'>";
+            resultado += $"<div class='col-md-2'>";
             resultado += $"<div class='grid-resultado {(Dimensao == 4 ? "w-h-240" : "w-h-180")}'>";
 
             for (int i = 0; i < no.EstadoAtual.GetLength(0); i++)
@@ -433,8 +435,16 @@
             }
 
             resultado += "</div>";
+            resultado += "</div>";
 
-            //resultado += @" <br /> ";
+            resultado += $"<div class='col-md-5'>";
+
+            resultado += $"<label><b>Profundidade: {no.Profundidade}</b></label><br />";
+            resultado += $"<label><b>Distância Manhattan: {no.ValorDistanciaManhattan}</b></label><br />";
+            resultado += $"<label><b>Hamming: {no.ValorHamming}</b></label><br />";
+
+            resultado += "</div>";
+            resultado += "</div>";
 
             MarkupString resultString = (MarkupString)resultado;
             NosMarkupStr.Add(resultString);
