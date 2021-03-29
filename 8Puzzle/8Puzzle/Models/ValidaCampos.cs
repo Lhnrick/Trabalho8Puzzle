@@ -3,7 +3,7 @@ namespace _8Puzzle.Models
     public class ValidaCampos
     {
         public bool ExistemRepeticoes(int[,] estado, out int repeticoes)
-        {
+        {            
             repeticoes = 0; //Contador para valores repetidos.
 
             for (int i = 0; i < estado.GetLength(0); i++)
@@ -17,8 +17,14 @@ namespace _8Puzzle.Models
                     {
                         for (int l = 0; l < estado.GetLength(1); l++)
                         {
-                            if (valorVerificado == estado[k, l] && (i != k && j != l)) //&& i != k && j != l
-                                return true;
+                            if (i == k && j == l)
+                                continue;
+
+                            if (valorVerificado == estado[k, l])
+                            {
+                                repeticoes++;
+                                //return true;
+                            }
                         }
                     }
                 }
