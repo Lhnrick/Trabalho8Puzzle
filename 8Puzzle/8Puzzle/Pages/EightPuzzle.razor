@@ -367,12 +367,28 @@
         // Pegar valores finais
         PegarValoresFormulario(false);
 
+        int repeticoes;
+
+        bool estadoinicialvalido = new ValidaCampos().ExistemRepeticoes(EstadoInicial, out repeticoes);
+
+        bool estadofinalvalido = new ValidaCampos().ExistemRepeticoes(EstadoFinal, out repeticoes);
+
+        if (!estadofinalvalido || !estadoinicialvalido)
+        {
+             MostrarMensagemErro("Foram encontradas" + repeticoes + "posicoes repetidas, preencha corretamente para resolver o puzzle");
+            return;
+        }
+
         bool ehResolvivel = new VerificaParidade().IsSolvable(EstadoInicial, EstadoFinal);
 
         if (!ehResolvivel)
         {
             MostrarMensagemErro("O conjunto de estados informados não é resolvivel");
             return;
+        }
+        else
+        {
+            EsconderMensagem();
         }
 
         bool encontrouSolucao = false;
