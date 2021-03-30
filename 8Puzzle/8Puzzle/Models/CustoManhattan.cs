@@ -28,10 +28,11 @@ namespace _8Puzzle.Models
                     if (valorAtual != 0)
                     {
                         var posicao = EncontrarValor(estadoObjetivo, valorAtual);
-                        distance += Math.Abs(i - posicao.Linha) + Math.Abs(j - posicao.Coluna);
+                        distance += Math.Abs(i - posicao.Linha) + Math.Abs(j - posicao.Coluna);                        
                     }
                 }
             }
+
             return distance;
         }
 
