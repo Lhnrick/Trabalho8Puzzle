@@ -1,4 +1,4 @@
-# **A`*` e 8 Puzzle**
+# **A * e 8 Puzzle**
 
 ### **Pseudocódigo**
 
